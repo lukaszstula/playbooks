@@ -1,0 +1,15 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+
+  tasks:
+     - name: issue shell command
+       shell: "zoaversion"
+       register: result
+     - name: response
+       debug:
+         msg: " {{ result }} "
+

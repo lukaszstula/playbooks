@@ -1,0 +1,17 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  tasks:
+
+    - name: Ensure we have our own comment added to the partitioned data set member
+      zos_lineinfile:
+       src: PL25816.JOBS.CNTL(UNTERSE8)
+       regexp: '//DUPADUPA'
+       line: 'this ia a test line'
+      register: result
+    - name: 
+      debug:
+       msg:  "{{ result }}"

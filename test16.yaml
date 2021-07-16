@@ -1,0 +1,34 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  vars:
+  # dupa1: 
+  #   poddupa1: one
+  #   poddupa2: two
+  # dupa2: 
+  #   poddupa3: three
+  #   poddupa4: four
+  tasks:
+    - name: issue TSO command
+      zos_tso_command:
+       commands: 
+       - LU PL25816
+      register: some_output
+ #  - name: some_output
+ #    debug: 
+ #     msg :  "{{ some_output.get('output').get('content')[4] }}"
+ #   - name: test output from dic
+ #     debug:
+ #      msg:  "{{ dupa2 }}"
+    - name: cos tam
+      debug: var=some_output.output[0].rc
+    - name: cos tam 2
+      debug: var=some_output.output[0].content[0]
+ #   - name: cos tam 3
+ #     debug: 
+ #      msg: "{{ some_output.output[0]}}"
+
+      

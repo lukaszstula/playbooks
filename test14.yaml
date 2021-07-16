@@ -1,0 +1,15 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  vars:
+   dataset: "PL25816.JOBS.FSA.CNTL"
+
+  tasks:
+    - name: copy pds member
+      zos_copy: 
+        src: PL25816.JOBS.FSA.CNTL(BPXJOB)
+        dest: PL25816.JOBS.FSA.CNTL(BPXNEW)
+        remote_src: true

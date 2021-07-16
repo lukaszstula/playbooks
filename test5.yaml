@@ -1,0 +1,122 @@
+###############################################################################
+# Copyright (c) IBM Corporation 2020
+###############################################################################
+
+###############################################################################
+# This sample playbook demonstrates using various modules included in the
+# Red Hat Ansible Certified Content for IBM Z core collection.
+#
+# Usage:
+#  ansible-playbook -i <inventory> <playbook>
+#
+# Example:
+#  ansible-playbook -i inventory zos-collection-sample.yaml
+#
+###############################################################################
+
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  vars:
+    job_name: "{{ansible_user|upper }}J"
+    
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    # Ping the host
+    - name: Ping host - {{ inventory_hostname }}
+      ping:
+      register: result
+
+    - name: Response
+      debug:
+        msg: "Ping result returned: {{ result.ping }}"
+
+    # Ensure folder exists in USS
+
+    - name: Ensure JCL folder exists to hold JCL
+      file:
+        path: /tmp/ansible/jcl
+        state: directory
+
+    # Copy from linux to USS
+
+    - name: Write {{ job_name }} JCL to system
+      shell: "echo {{ lookup('file', '/etc/ansible/playbooks/files/HELLO.jcl') | quote }} > /tmp/ansible/jcl/HELLO"
+      changed_when: true
+
+    # Submit job from USS
+
+    - name: Submit {{ job_name }} jcl 
+      zos_job_submit:
+        src: /tmp/ansible/jcl/HELLO
+        location: USS
+        wait: True
+
+    # Query job sttaus
+
+    - name: Query job {{ job_name }} status
+      zos_job_query:
+        job_name: "{{job_name}}"
+      register: result
+
+    - name: Query submitted job result 
+      debug:
+        msg: "Query submitted job {{ job_name }} result: {{ result.jobs[0].ret_code }}"
+
+    # Query job output
+
+    - name: Query {{ job_name }} job output
+      zos_job_output:
+        job_name: "{{job_name}}"
+        ddname: "SYSUT2"
+      register: result
+
+    - name: Query {{ job_name }} job output result
+      debug:
+        msg: "Get the job output of submitted job {{job_name}} result: {{ result.jobs[0].ddnames[4].content }}"
+
+
+    # Remove JCL and folder from USS
+
+    - name: Remove HELLO JCL and supporting folder from z/OS target node
+      file:
+        path: /tmp/ansible/jcl
+        state: absent
+
+    # Create a data set
+    - name: Create a PDS data set '{{ansible_user | upper }}.TEST.FROM.ANSIBLE'
+      zos_data_set:
+        name: "{{ ansible_user | upper }}.TEST.FROM.ANSIBLE"
+        type: pds
+        size: 5M
+        format: fb
+        record_length: 80
+        replace: yes
+      register: result
+
+    - name: Response
+      debug:
+        msg: "Create a PDS data set '{{ansible_user | upper }}.TEST.FROM.ANSIBLE' result: {{ result }}"
+
+    # Validate data set Created
+    - name: Check for data set '{{ansible_user | upper }}.TEST.FROM.ANSIBLE'
+      shell: "dls -l {{ansible_user | upper}}.TEST.FROM.ANSIBLE"
+      register: result
+      changed_when: true
+
+    - name: Response
+      debug:
+        msg: "Check for data set '{{ansible_user | upper}}.TEST.FROM.ANSIBLE' returned {{ result }}"
+        
+# Delete data set
+#    - name: Delete data set '{{ansible_user | upper}}.TEST.FROM.ANSIBLE'
+#      zos_data_set:
+#        name: "{{ansible_user | upper}}.TEST.FROM.ANSIBLE"
+#        state: absent
+#      register: result
+#    - name: Response
+#      debug:
+#        msg: "Delete data set '{{ansible_user | upper}}.TEST.FROM.ANSIBLE' returned: {{ result }}"

@@ -1,0 +1,18 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  vars:
+  tasks:
+# testing loops
+    - name: issue TSO command
+      zos_tso_command:
+       commands: 
+       - "LU {{ item }} "
+      loop:
+       - "PL25816"
+       - "PL25817"
+      register: some_output
+      when: 1 < 0

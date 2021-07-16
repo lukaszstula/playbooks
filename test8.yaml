@@ -1,0 +1,24 @@
+---
+- hosts: all
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+
+  tasks:
+#    # Ping the host
+#    - name: Ping host - {{ inventory_hostname }}
+#      ping:
+#      register: result
+#     - name: define zfs
+#       shell: "zfsadm define -aggregate ZFS.S0W1.TEST -cylinders 50 50"
+#       register: result
+#       changed_when: true
+
+     - name: issue shell command
+       shell: "ls -l"
+       register: result
+     - name: response
+       debug:
+         msg: " {{ result }} "
+

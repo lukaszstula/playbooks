@@ -1,0 +1,44 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+
+
+  tasks:
+ # Create a data set
+    - name: Create a PDS data set 
+      zos_data_set:
+        name: "PL25816.TEST.FROM.ANSIBLE2"
+        type: pds
+        size: 5M
+        format: fb
+        record_length: 80
+        replace: yes
+      register: result
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ # tasks:
+ #    - name: Create a PDS data set {{ data_set_name }}
+ #      zos_data_set:
+ #       name: PL25816.TEST.ANSIBLE
+ #       type: pds
+ #       space_primary: 5
+ #       space_type: M
+ #       record_format: fb
+ #       record_length: 80
+ #       replace: yes
+ #      register: result

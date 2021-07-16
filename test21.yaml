@@ -1,0 +1,22 @@
+
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  vars:
+    job_name: "{{ansible_user|upper }}A"
+    
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: Query job {{ job_name }} status
+      zos_job_query:
+        job_name: "{{job_name}}"
+      register: result
+    - name: say
+      debug:
+       msg: "{{result.jobs[item].ret_code}}"
+      loop: 
+       - 0
+       - 1

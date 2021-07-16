@@ -1,0 +1,14 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  connection: ibm.ibm_zos_core.zos_ssh
+  tasks:
+  - name: ping and perform checks
+    zos_ping:
+    register: result
+  - name: present results
+    debug:
+      msg: " {{ result }} "

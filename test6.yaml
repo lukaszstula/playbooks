@@ -1,0 +1,15 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  tasks:
+  - name: test
+    shell: dls -l "`hlq`.*"
+    register: result
+  - name: Response
+    debug:
+     msg: "Output from command is {{ result.stdout_lines|center }}"
+    
+

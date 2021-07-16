@@ -1,0 +1,25 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  tasks:
+  - name: execute command
+    zos_job_query:
+     job_name: "PL2581*"
+    register: result
+
+#  tasks:
+#    - name: Ping host - {{ inventory_hostname }}
+#      ping:
+#      register: result
+  - name: test
+    debug:
+      msg: " {{ result.jobs[item].job_name }} "
+    with_items: "{{ result.jobs|length}}"
+     
+ 
+
+        
+       

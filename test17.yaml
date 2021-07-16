@@ -1,0 +1,18 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  vars:
+  tasks:
+    - name: Create an operator action (WTOR) "DUMP COMM=('test dump')" for
+        system {{ system_name }}
+      zos_operator:
+        cmd: "DUMP COMM=('test dump')"
+      register: result_zos_operator
+
+    - name: Response for create an operator action
+        (WTOR) "DUMP COMM=('test dump')" for system {{ system_name }}
+      debug:
+        msg: "{{ result_zos_operator }}"

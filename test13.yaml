@@ -1,0 +1,22 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  vars:
+   dataset: "PL25816.ES01"
+
+  tasks:
+    - name: fetch a pds member
+      zos_fetch:
+        src:  "{{ dataset }}"
+        dest: "/etc/ansible/playbooks/files/"
+        encoding:
+         from: IBM-037
+         to:   ISO8859-1
+        flat: true
+        is_binary: false
+        validate_checksum: true
+        
+   

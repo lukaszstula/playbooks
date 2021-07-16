@@ -1,0 +1,14 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+  tasks:
+  - name: send command
+    zos_operator:
+     cmd: "f cnms,inglist HZSPROC,outmode=line"
+    register: result
+  - name: response
+    debug:
+     msg: "{{ result }}"
