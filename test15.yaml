@@ -5,7 +5,7 @@
   gather_facts: no
   environment: "{{ environment_vars }}"
   tasks:
-   - name: send command
+   - name: send command to host
      zos_operator:
       cmd: 'd r,r'
      register: result
