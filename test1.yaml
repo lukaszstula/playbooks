@@ -14,10 +14,10 @@
 #    - name: Ping host - {{ inventory_hostname }}
 #      ping:
 #      register: result
-  - name: test
-    debug:
-      msg: " {{ result.jobs[item].job_name }} "
-    with_items: "{{ result.jobs|length}}"
+#  - name: test
+#    debug:
+#      msg: " {{ result.jobs[item].job_name }} "
+#    with_items: "{{ result.jobs|length}}"
      
  
 
