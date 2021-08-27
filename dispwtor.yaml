@@ -13,10 +13,7 @@
      debug:
       msg:  "{{ result }}"
    - name: writing output to local file
-     local_action: 
-      copy:
-       content: "{{ result }}"
-       dest: file
+     local_action: copy content="{{ result.stdout_lines[0] }}" dest=file
 #     ={{ result }} dest=file
 # 
 #   - name: save output from local cmd to local directory
