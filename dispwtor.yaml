@@ -12,7 +12,8 @@
    - name: response
      debug:
       msg:  "{{ result }}"
-   - local_action: 
+   - name: writing output to local file
+     local_action: 
      copy:
       content: "{{ result }}"
       dest: file
