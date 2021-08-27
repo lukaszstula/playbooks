@@ -14,6 +14,6 @@
       msg:  "{{ result }}"
    - name: save output to local directory
      copy:
-       content: "{{ result.stdout | replace('\\n', '\n') }}"
+       content: "{{ result  | replace('\\n', '\n') }}"
        dest: "/etc/ansible/output/{{ inventory_hostname }}.ios"
       
