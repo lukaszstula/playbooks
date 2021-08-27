@@ -14,7 +14,7 @@
       msg:  "{{ result }}"
    - local_action: 
      copy:
-      content: {{ result }}
+      content: "{{ result }}"
       dest: file
 #     ={{ result }} dest=file
 # 
