@@ -1,6 +1,6 @@
 ---
 - name: OS family
-  hosts: localhost
+  hosts: tet2 localhost
   tasks:
     - name: print OS Family
       debug: var=ansible_os_family     
