@@ -14,9 +14,9 @@
       msg:  "{{ result }}"
    - name: writing output to local file
      local_action: 
-     copy:
-      content: "{{ result }}"
-      dest: file
+      copy:
+       content: "{{ result }}"
+       dest: file
 #     ={{ result }} dest=file
 # 
 #   - name: save output from local cmd to local directory
