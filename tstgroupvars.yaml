@@ -1,8 +1,0 @@
----
-- name: group var test
-  hosts: first
-  tasks:
-    - name: print var
-      debug: var=some_var
-
-...
