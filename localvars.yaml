@@ -7,6 +7,6 @@
       
 - name: save output to local directory
   copy:
-    content: "{{ config.stdout | replace('\\n', '\n') }}"           
+    content: "{{ ansible_os_family.stdout | replace('\\n', '\n') }}"           
     dest: "show-output/{{ inventory_hostname }}.ios"
 ...
