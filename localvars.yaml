@@ -6,7 +6,7 @@
       debug: var=ansible_os_family
       
 - name: save output to local directory
-  copy:
+  ansible.builtin.copy:
     content: "{{ ansible_os_family.stdout | replace('\\n', '\n') }}"           
     dest: "show-output/{{ inventory_hostname }}.ios"
 ...
