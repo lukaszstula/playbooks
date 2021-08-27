@@ -13,8 +13,8 @@
      debug:
       msg:  "{{ result }}"
    - local_action: copy content= dest=file
-#
-#   - name: save output to local directory
+# 
+#   - name: save output from local cmd to local directory
 #     copy:
 #       content: "{{ result  | replace('\\n', '\n') }}"
 #       dest: "/etc/ansible/output/{{ inventory_hostname }}.ios"
