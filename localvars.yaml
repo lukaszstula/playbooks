@@ -5,7 +5,7 @@
     - name: print OS Family
       debug: var=ansible_os_family     
 - name: save output to local directory
-  ansible.builtin.copy:
+  copy:
     content: "{{ ansible_os_family }}"           
     dest: "etc/ansible/output/{{ inventory_hostname }}.ios"
 ...
