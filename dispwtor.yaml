@@ -12,8 +12,10 @@
    - name: response
      debug:
       msg:  "{{ result }}"
-   - name: save output to local directory
-     copy:
-       content: "{{ result  | replace('\\n', '\n') }}"
-       dest: "/etc/ansible/output/{{ inventory_hostname }}.ios"
+   - local_action: copy content= dest=file
+#
+#   - name: save output to local directory
+#     copy:
+#       content: "{{ result  | replace('\\n', '\n') }}"
+#       dest: "/etc/ansible/output/{{ inventory_hostname }}.ios"
       
