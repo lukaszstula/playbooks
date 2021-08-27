@@ -12,7 +12,7 @@
    - name: response
      debug:
       msg:  "{{ result }}"
-   - local_action: copy content=result dest=file
+   - local_action: copy content={{ result }} dest=file
 # 
 #   - name: save output from local cmd to local directory
 #     copy:
