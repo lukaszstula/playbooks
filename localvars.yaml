@@ -3,10 +3,9 @@
   hosts: localhost
   tasks:
     - name: print OS Family
-      debug: var=ansible_os_family
-      
+      debug: var=ansible_os_family     
 - name: save output to local directory
   ansible.builtin.copy:
-    content: "{{ ansible_os_family.stdout | replace('\\n', '\n') }}"           
-    dest: "show-output/{{ inventory_hostname }}.ios"
+    content: "{{ ansible_os_family }}"           
+    dest: "etc/ansible/output/{{ inventory_hostname }}.ios"
 ...
