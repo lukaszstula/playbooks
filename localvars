@@ -1,0 +1,7 @@
+---
+- name: OS family
+  hosts: all
+  tasks:
+    - name: print OS Family
+      debug: var=ansible_os_family
+...
