@@ -1,7 +1,12 @@
 ---
 - name: OS family
-  hosts: all
+  hosts: localhost
   tasks:
     - name: print OS Family
       debug: var=ansible_os_family
+      
+- name: save output to local directory
+  copy:
+  content: "{{ config.stdout | replace('\\n', '\n') }}"           
+   dest: "show-output/{{ inventory_hostname }}.ios"
 ...
