@@ -28,7 +28,8 @@
         state: directory
 
     - name: Write HELLO JCL to system
-      shell: "echo {{ lookup('file', '/etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN') >>
+      shell: >
+              "echo {{ lookup('file', '/etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN')
               | quote }} > /tmp/ansible/jcl/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN"
       changed_when: true
 
