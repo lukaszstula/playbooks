@@ -22,15 +22,6 @@
   environment: "{{ environment_vars }}"
 
   tasks:
-    # Ping the host
-    - name: Ping host - {{ inventory_hostname }}
-      ping:
-      register: result
-
-    - name: Response
-      debug:
-        msg: "Ping result returned: {{ result.ping }}"
-
     - name: Ensure JCL folder exists to hold JCL
       file:
         path: /tmp/ansible/jcl
@@ -38,7 +29,7 @@
 
     - name: Write HELLO JCL to system
       shell: "echo {{ lookup('file', '/etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-') | quote }} > /tmp/ansible/jcl/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN"
+              ') | quote }} > /tmp/ansible/jcl/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN"
       changed_when: true
 
 
