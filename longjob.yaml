@@ -26,12 +26,14 @@
       file:
         path: /tmp/ansible/jcl
         state: directory
+        
+    - name: Copy a local binary file to a PDSE member
+      zos_copy:
+        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        is_binary: true
 
-    - name: Write HELLO JCL to system
-      shell: >
-              "echo {{ lookup('file', '/etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN')
-              | quote }} > /tmp/ansible/jcl/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN"
-      changed_when: true
+
 
 
 
