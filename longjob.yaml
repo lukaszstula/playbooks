@@ -30,19 +30,20 @@
          replace: true
          record_format: fb
          record_length: 1024
-         space_type: CYL
-         space_primary: 5
-         space_secondary: 2
+         space_type: TRK
+         block_size: 6144
+         space_primary: 27
+         space_secondary: 10
       register: result
 
     - name: Response for data set creation
       debug:
         msg: "{{ result }}"
-#    - name: Copy a local binary file to ds
-#      zos_copy:
-#        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-#        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-#        is_binary: true
+    - name: Copy a local binary file to ds
+      zos_copy:
+        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        is_binary: true
 
 
 
