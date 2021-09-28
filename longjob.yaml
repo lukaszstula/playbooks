@@ -22,9 +22,8 @@
   environment: "{{ environment_vars }}"
 
   tasks:   
-  
-     - name: Create a sequential data set
-       zos_data_set:
+    - name: Create a sequential data set
+      zos_data_set:
          name: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
          type: basic
          state: present
@@ -34,10 +33,10 @@
          space_type: CYL
          space_primary: 5
          space_secondary: 2
-       register: result
+      register: result
 
-    - name: Response for data set creation
-      debug:
+   - name: Response for data set creation
+     debug:
         msg: "{{ result }}"
 #    - name: Copy a local binary file to ds
 #      zos_copy:
