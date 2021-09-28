@@ -35,8 +35,8 @@
          space_secondary: 2
       register: result
 
-   - name: Response for data set creation
-     debug:
+    - name: Response for data set creation
+      debug:
         msg: "{{ result }}"
 #    - name: Copy a local binary file to ds
 #      zos_copy:
