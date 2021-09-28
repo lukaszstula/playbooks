@@ -21,19 +21,29 @@
   gather_facts: no
   environment: "{{ environment_vars }}"
 
-  tasks:    
-    - name: Copy a local binary file to ds
-      zos_copy:
-        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-          dd_type: BASIC
-          space_primary: 5
-          space_secondary: 5
-          space_type: CYL
-          record_format: FB
-          record_length: 1024
-          block_size: 6144
-        is_binary: true
+  tasks:   
+  
+     - name: Create a sequential data set
+       zos_data_set:
+         name: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+         type: basic
+         state: present
+         replace: true
+         record_format: fb
+         record_length: 1024
+         space_type: CYL
+         space_primary: 5
+         space_secondary: 2
+       register: result
+
+    - name: Response for data set creation
+      debug:
+        msg: "{{ result }}"
+#    - name: Copy a local binary file to ds
+#      zos_copy:
+#        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+#        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+#        is_binary: true
 
 
 
