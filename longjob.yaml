@@ -26,7 +26,6 @@
       zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-        destination_dataset: 
           dd_type: BASIC
           space_primary: 5
           space_secondary: 5
