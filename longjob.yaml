@@ -21,16 +21,19 @@
   gather_facts: no
   environment: "{{ environment_vars }}"
 
-  tasks:
-    - name: Ensure JCL folder exists to hold JCL
-      file:
-        path: /tmp/ansible/jcl
-        state: directory
-        
-    - name: Copy a local binary file to a PDSE member
+  tasks:    
+    - name: Copy a local binary file to ds
       zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        destination_dataset: 
+          dd_type: BASIC
+          space_primary: 5
+          space_secondary: 5
+          space_type: CYL
+          record_format: FB
+          record_length: 1024
+          block_size: 6144
         is_binary: true
 
 
