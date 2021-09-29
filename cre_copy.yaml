@@ -93,6 +93,9 @@
       zos_job_query:
         job_name: PL258168
       register: result
+    - name: Response
+      debug:
+        msg: "Get the job output of submitted job PL25816B result: {{ result }}"
 
 
 
