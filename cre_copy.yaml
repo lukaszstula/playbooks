@@ -22,7 +22,7 @@
   environment: "{{ environment_vars }}"
 
   tasks:   
-    - name: Create a sequential data set
+    - name: Create first sequential data set
       zos_data_set:
          name: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
          type: basic
@@ -39,10 +39,37 @@
     - name: Response for data set creation
       debug:
         msg: "{{ result }}"
-    - name: Copy a local binary file to ds
+        
+    - name: Copy first local binary file to ds
       zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        force: yes
+        ignore_sftp_stderr: true
+        is_binary: true
+        
+    - name: Create second sequential data set
+      zos_data_set:
+         name: WWZ038.GSD##E1.FSA101.#JCL.XMIT
+         type: basic
+         state: present
+         replace: true
+         record_format: fb
+         record_length: 80
+         space_type: TRK
+         block_size: 3120
+         space_primary: 2
+         space_secondary: 1
+      register: result
+
+    - name: Response for data set creation
+      debug:
+        msg: "{{ result }}"
+        
+     - name: Copy second local binary file to ds
+       zos_copy:
+        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.#JCL.XMIT
+        dest: WWZ038.GSD##E1.FSA101.#JCL.XMIT
         force: yes
         ignore_sftp_stderr: true
         is_binary: true
