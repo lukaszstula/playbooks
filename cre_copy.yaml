@@ -73,6 +73,17 @@
         force: yes
         ignore_sftp_stderr: true
         is_binary: true
+        
+    - name: Submit receive job
+      zos_job_submit:
+        src: /etc/ansible/playbooks/jobs/receivefsa
+        location: USS
+        wait: True
+
+    - name: Query submitted job 
+      zos_job_query:
+        job_name: PL258168
+      register: result
 
 
 
