@@ -4,8 +4,8 @@
     - ibm.ibm_zos_core
   gather_facts: no
   environment: "{{ environment_vars }}"
-  vars:
-   dataset: "PL25816.JOBS.FSA.CNTL"
+#  vars:
+#   dataset: "PL25816.JOBS.FSA.CNTL"
 
   tasks:
     - name: copy pds member
