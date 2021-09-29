@@ -66,8 +66,8 @@
       debug:
         msg: "{{ result }}"
         
-     - name: Copy second local binary file to ds
-       zos_copy:
+    - name: Copy second local binary file to ds
+      zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.#JCL.XMIT
         dest: WWZ038.GSD##E1.FSA101.#JCL.XMIT
         force: yes
