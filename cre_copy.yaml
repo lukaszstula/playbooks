@@ -74,9 +74,18 @@
         ignore_sftp_stderr: true
         is_binary: true
         
+    - name: Ensure JCL folder exists to hold JCL
+      file:
+        path: /tmp/ansible/jcl
+        state: directory
+
+    - name: Write receive JCL to system
+      shell: "echo {{ lookup('file', '/etc/ansible/playbooks/jobs/receivefsa') | quote }} > /tmp/ansible/jcl/RECFSA"
+      changed_when: true
+        
     - name: Submit receive job
       zos_job_submit:
-        src: /etc/ansible/playbooks/jobs/receivefsa
+        src: /tmp/ansible/jcl/RECFSA
         location: USS
         wait: True
 
