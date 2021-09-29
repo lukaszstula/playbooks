@@ -43,6 +43,8 @@
       zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        force: yes
+        ignore_sftp_stderr: true
         is_binary: true
 
 
