@@ -1,1 +1,27 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
 
+  tasks:   
+    - name: Copy first local binary file to ds
+      zos_copy:
+        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        destination_dataset:
+          dd_type: BASIC
+          space_primary: 27
+          space_secondary: 10
+          space_type: TRK
+          record_format: FB
+          record_length: 1024
+          block_size: 6144
+        ignore_sftp_stderr: true
+        is_binary: true
+        
+    - name: Response for data set creation
+      debug:
+        msg: "{{ result }}"
+        
