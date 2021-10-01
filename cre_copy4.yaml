@@ -20,7 +20,7 @@
           block_size: 6144
 #        ignore_sftp_stderr: true
         is_binary: true
-        force: true
+        force: false
         
     - name: Response for data set creation
       debug:
