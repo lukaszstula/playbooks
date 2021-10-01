@@ -18,8 +18,9 @@
           record_format: FB
           record_length: 1024
           block_size: 6144
-        ignore_sftp_stderr: true
+#        ignore_sftp_stderr: true
         is_binary: true
+        force: true
         
     - name: Response for data set creation
       debug:
