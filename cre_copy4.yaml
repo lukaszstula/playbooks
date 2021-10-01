@@ -18,7 +18,5 @@
           record_format: FB
           record_length: 1024
           block_size: 6144
-        is_binary: true
-        force: false
 
         
