@@ -12,17 +12,13 @@
         dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         destination_dataset:
           dd_type: BASIC
-#          space_primary: 27
-#          space_secondary: 10
+          space_primary: 27
+          space_secondary: 10
           space_type: TRK
           record_format: FB
           record_length: 1024
           block_size: 6144
-#        ignore_sftp_stderr: true
         is_binary: true
         force: false
-        
-    - name: Response for data set creation
-      debug:
-        msg: "{{ result }}"
+
         
