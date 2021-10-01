@@ -1,0 +1,25 @@
+---
+- hosts: TET2
+  collections:
+    - ibm.ibm_zos_core
+  gather_facts: no
+  environment: "{{ environment_vars }}"
+
+  tasks:   
+    - name: Create first sequential data set
+      zos_data_set:
+         name: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+         type: basic
+         state: present
+         replace: true
+         record_format: fb
+         record_length: 1024
+         space_type: TRK
+         block_size: 6144
+         space_primary: 27
+         space_secondary: 10
+      register: result
+
+    - name: Response for data set creation
+      debug:
+        msg: "{{ result }}"
