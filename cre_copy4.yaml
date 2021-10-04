@@ -8,16 +8,15 @@
   tasks:   
     - name: Copy first local binary file to ds
       zos_copy:
-        src: '/etc/ansible/playbooks/files/WWZ038.FSA101.DUMPTERS.D030320.BIN'
-        dest: 'PL25816.FSA101.DUMPTERS.D030320.BIN'
+        src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
+        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         destination_dataset:
           dd_type: BASIC
- #         space_primary: 27
- #         space_secondary: 10
- #         space_type: M
+          space_primary: 27
+          space_secondary: 10
+          space_type: TRK
           record_format: FB
           record_length: 1024
           block_size: 6144
         is_binary: true
 
-        
