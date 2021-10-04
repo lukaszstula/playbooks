@@ -12,9 +12,9 @@
         dest: 'PL25816.FSA101.DUMPTERS.D030320.BIN'
         destination_dataset:
           dd_type: BASIC
-          space_primary: 27
-          space_secondary: 10
-          space_type: TRK
+ #         space_primary: 27
+ #         space_secondary: 10
+          space_type: M
           record_format: FB
           record_length: 1024
           block_size: 6144
