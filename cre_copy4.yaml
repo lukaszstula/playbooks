@@ -9,7 +9,7 @@
     - name: Copy first local binary file to ds
       zos_copy:
         src: /etc/ansible/playbooks/files/WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
-        dest: PL25816.FSA101.DUMPTERS.D030320.BIN
+        dest: WWZ038.GSD##E1.FSA101.DUMPTERS.D030320.BIN
         destination_dataset:
           dd_type: BASIC
           space_primary: 27
