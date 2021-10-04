@@ -14,7 +14,7 @@
           dd_type: BASIC
  #         space_primary: 27
  #         space_secondary: 10
-          space_type: M
+ #         space_type: M
           record_format: FB
           record_length: 1024
           block_size: 6144
